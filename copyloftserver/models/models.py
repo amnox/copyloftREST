@@ -2,23 +2,20 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class User(models.Model):
+class ServiceUser(models.Model):
 	#User Table
-	id = models.AutoField(primary_key=True)
-	first_name = models.CharField(max_length=200)
-	last_name = models.CharField(max_length=200)
-	email = models.EmailField()
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	phone = models.BigIntegerField()
-	password = models.CharField(max_length=200)
 	date_joined = models.DateField(auto_now_add=True)
 
 class UserAddress(models.Model):
 	#Saved User Addresses
 	id = models.AutoField(primary_key=True)
-	user_id = models.ForeignKey('User',on_delete=models.CASCADE,)
+	user_id = models.ForeignKey('ServiceUser',on_delete=models.CASCADE,)
 	house = models.CharField(max_length=200)
 	street_1 = models.CharField(max_length=200)
 	house_2 = models.CharField(max_length=200)
@@ -29,7 +26,7 @@ class UserAddress(models.Model):
 class Cart(models.Model):
 	#User Cart
 	id = models.AutoField(primary_key=True)
-	user_id = models.ForeignKey('User',on_delete=models.CASCADE,)
+	user_id = models.ForeignKey('ServiceUser',on_delete=models.CASCADE,)
 	payment = models.NullBooleanField()
 	date = models.DateField(auto_now_add=True)
 	payment_date = models.DateField(null=True)
@@ -64,11 +61,9 @@ class OrderStatus(models.Model):
 
 class Provider(models.Model):
 	#Print Service Provider Details
-	id = models.AutoField(primary_key=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	business_name = models.CharField(max_length=200)
-	email = models.CharField(max_length=200)
 	phone = models.BigIntegerField()
-	password = models.CharField(max_length=200)
 	address_line_1 = models.CharField(max_length=200)
 	address_line_2 = models.CharField(max_length=200)
 	state = models.CharField(max_length=200)

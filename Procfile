@@ -1,0 +1,1 @@
+web: gunicorn copyloftREST.wsgi --log-file -

@@ -143,4 +143,4 @@ USE_TZ = True
 
 STATIC_URL = 'webapp/static/'
 
-ALLOWED_HOSTS = ['copyloftweb.herokuapp.com']
+ALLOWED_HOSTS = ['copyloftweb.herokuapp.com','www.copyloft.in','copyloft.in']

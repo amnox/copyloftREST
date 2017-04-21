@@ -8,9 +8,12 @@ from django.contrib.auth.models import User
 
 class ServiceUser(models.Model):
 	#User Table
+	id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	phone = models.BigIntegerField()
 	date_joined = models.DateField(auto_now_add=True)
+	def __str__(self):
+		return "%s" % (self.user.username)
 
 class UserAddress(models.Model):
 	#Saved User Addresses
@@ -21,7 +24,7 @@ class UserAddress(models.Model):
 	house_2 = models.CharField(max_length=200)
 	city = models.CharField(max_length=200)
 	state = models.CharField(max_length=200)
-	pincode = models.PositiveSmallIntegerField()
+	pincode = models.PositiveIntegerField()
 
 class Cart(models.Model):
 	#User Cart
@@ -30,7 +33,8 @@ class Cart(models.Model):
 	payment = models.NullBooleanField()
 	date = models.DateField(auto_now_add=True)
 	payment_date = models.DateField(null=True)
-
+	def __str__(self):
+		return "%s's Cart, Payment: %s" % (self.user_id.user.username,self.payment)
 
 class CartBook(models.Model):
 	#List of books in a cart
@@ -61,6 +65,7 @@ class OrderStatus(models.Model):
 
 class Provider(models.Model):
 	#Print Service Provider Details
+	id = models.AutoField(primary_key=True)
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	business_name = models.CharField(max_length=200)
 	phone = models.BigIntegerField()
@@ -68,7 +73,7 @@ class Provider(models.Model):
 	address_line_2 = models.CharField(max_length=200)
 	state = models.CharField(max_length=200)
 	city = models.CharField(max_length=200)
-	pincode = models.CharField(max_length=200)
+	pincode = models.PositiveIntegerField()
 
 class ProviderVerification(models.Model):
 	#Provider Verification Documents

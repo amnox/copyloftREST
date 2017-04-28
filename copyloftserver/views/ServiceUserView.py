@@ -60,4 +60,5 @@ class ConcludeServiceUserCart(generics.UpdateAPIView):
 		return Cart.objects.filter(payment=False).filter(user_id=self.kwargs['user_id'])
 	def perform_update(self, serializer):
 		pprint.pprint(serializer.validated_data)
-		#serializer.save()
+		serializer.save()
+

@@ -44,9 +44,10 @@ class CartBook(models.Model):
 	page_size = models.ForeignKey('Page',on_delete=models.PROTECT,)
 	page_quality = models.ForeignKey('PageQuality',on_delete=models.PROTECT,)
 	ink_type = models.ForeignKey('InkType',on_delete=models.PROTECT,)
-	cover_id = models.ForeignKey('Cover',on_delete=models.PROTECT,)
-	binding = models.ForeignKey('CoverBinding',on_delete=models.PROTECT,)
+	cover_id = models.ForeignKey('Cover',on_delete=models.PROTECT,null=True)
+	binding = models.ForeignKey('CoverBinding',on_delete=models.PROTECT,null=True)
 	price = models.DecimalField(max_digits=5, decimal_places=2)
+	commercial_page = models.BooleanField(default=True)
 
 class OrderMapping(models.Model):
 	#Order map for each book
@@ -100,9 +101,13 @@ class CoverBinding(models.Model):
 class Page(models.Model):
 	#Page types
 	id = models.AutoField(primary_key=True)
-	covers = models.ForeignKey('Cover',on_delete=models.PROTECT,)
+	name = models.CharField(max_length=200,default='demo')
+	covers = models.ForeignKey('Cover',on_delete=models.PROTECT,null=True)
 	size = models.CharField(max_length=200)
 	cost = models.DecimalField(max_digits=5, decimal_places=2)
+	def __str__(self):
+		return "Page Type: %s" % (self.name)
+
 
 class PageQuality(models.Model):
 	#Page quality

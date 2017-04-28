@@ -9,6 +9,8 @@ from copyloftserver.views.ServiceUserView import UpdateServiceUserAddress
 from copyloftserver.views.ServiceUserView import GetServiceUserCart
 from copyloftserver.views.ServiceUserView import CreateServiceUserCart
 from copyloftserver.views.ServiceUserView import ConcludeServiceUserCart
+from copyloftserver.views.PageView import PageList
+from copyloftserver.views.PageView import PageSingle
 
 urlpatterns = [
 	url(r'^user/$', UserList.as_view()),
@@ -20,6 +22,9 @@ urlpatterns = [
     url(r'^serviceuser/(?P<user_id>[0-9]+)/cart/$', GetServiceUserCart.as_view()),
     url(r'^serviceuser/(?P<user_id>[0-9]+)/cart/create/$', CreateServiceUserCart.as_view()),
     url(r'^serviceuser/(?P<user_id>[0-9]+)/cart/conclude/$', ConcludeServiceUserCart.as_view()),
+
+    url(r'^service/pagetype/$',PageList.as_view()),
+    url(r'^service/pagetype/(?P<pk>[0-9]+)/$',PageSingle.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

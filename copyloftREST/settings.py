@@ -141,6 +141,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = 'webapp/static/'
+STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['copyloftweb.herokuapp.com','www.copyloft.in','copyloft.in']
+ALLOWED_HOSTS = ['copyloftweb.herokuapp.com','www.copyloft.in','copyloft.in','127.0.0.1']

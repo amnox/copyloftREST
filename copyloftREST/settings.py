@@ -143,4 +143,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+MEDIA_URL = '/media/'
+
 ALLOWED_HOSTS = ['copyloftweb.herokuapp.com','www.copyloft.in','copyloft.in','127.0.0.1']

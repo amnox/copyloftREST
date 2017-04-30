@@ -82,6 +82,6 @@ class ServiceUserCartBooks(generics.ListCreateAPIView):
     queryset = CartBook.objects.all()
 
 
-class ServiceUserCartBook(generics.RetrieveUpdateAPIView):
+class ServiceUserCartBook(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ServiceUserCartBookSerializer
     queryset = CartBook.objects.all()

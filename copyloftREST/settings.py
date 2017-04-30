@@ -42,6 +42,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'copyloftserver',
     'webapp',
+    'storages',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -143,8 +144,22 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+# MEDIA_URL = '/media/'
 
 ALLOWED_HOSTS = ['copyloftweb.herokuapp.com','www.copyloft.in','copyloft.in','127.0.0.1']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAI3Y6U4GASMY2INYA'
+
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'copyloftdata'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN

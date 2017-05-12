@@ -81,6 +81,10 @@ class ServiceUserCartBooks(generics.ListCreateAPIView):
     serializer_class = ServiceUserCartBookSerializer
     queryset = CartBook.objects.all()
 
+    def perform_create(self,serializer):
+        pprint.pprint(serializer)
+        serializer.save()
+
 
 class ServiceUserCartBook(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ServiceUserCartBookSerializer

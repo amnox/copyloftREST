@@ -1,9 +1,15 @@
+import magic
+import inspect
+from docx import Document
+from pprint import pprint
+import re
 from rest_framework import serializers
 from copyloftserver.models.models import ServiceUser
 from copyloftserver.models.models import UserAddress
 from copyloftserver.models.models import Cart
 from copyloftserver.models.models import CartBook
 from django.contrib.auth.models import User
+
 
 from copyloftserver.serializers.UserSerializer import UserSerializer
 

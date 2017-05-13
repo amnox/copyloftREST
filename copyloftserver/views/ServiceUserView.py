@@ -15,6 +15,8 @@ from rest_framework.decorators import api_view
 from rest_framework import generics
 from django.core.exceptions import ValidationError
 import pprint
+from copyloftserver.services.PDF import PDF
+from copyloftserver.services.price_calculator import PriceCalculator
 
 
 class ServiceUserList(generics.ListCreateAPIView):
@@ -82,8 +84,12 @@ class ServiceUserCartBooks(generics.ListCreateAPIView):
     queryset = CartBook.objects.all()
 
     def perform_create(self,serializer):
-        pprint.pprint(serializer)
-        serializer.save()
+        uploaded_file = PDF(serializer.validated_data['file'].file)
+        serializer.validated_data['page_count'] = uploaded_file.get_page_count()
+        calculate_price = PriceCalculator(serializer.validated_data)
+        pprint.pprint(calculate_price.get_total_price())
+        serializer.validated_data['price'] = 0
+        #serializer.save()
 
 
 class ServiceUserCartBook(generics.RetrieveUpdateDestroyAPIView):
